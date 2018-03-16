@@ -2,6 +2,11 @@ language: csharp
 dist: trusty
 mono: none
 dotnet: 2.0.0
+addons:
+  chrome: stable
+before_install:
+  - # start your web application and listen on `localhost`
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 script:
  - dotnet restore --verbosity m
  - dotnet build
