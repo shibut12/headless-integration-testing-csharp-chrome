@@ -1,7 +1,9 @@
-using OpenQA.Selenium.Chrome;
-using System.IO;
-using System.Reflection;
 using Xunit;
+using System;
+using System.IO;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System.Reflection;
 
 namespace HeadLessTest
 {
@@ -28,7 +30,7 @@ namespace HeadLessTest
                 desiredCapabilities
             );
         }
-        
+
         [Fact]
         public void GoogleHomePageVerifyPageIsLoading()
         {
@@ -37,6 +39,20 @@ namespace HeadLessTest
             chromeDriver.Quit();
 
             Assert.Equal("Google", pgTitle);
+        }
+
+        [Fact]
+        public void GoogleHomePageVerifyUserIsAbleToSearch()
+        {
+            chromeDriver.Navigate().GoToUrl(googleUrl);
+            IWebElement searchInputBox = chromeDriver.FindElement(By.Name("q"));
+            searchInputBox.SendKeys("codewithdot.net");
+            searchInputBox.Submit();
+            var pgTitle = chromeDriver.Title;
+
+            chromeDriver.Quit();
+
+            Assert.Equal("codewithdot.net - Google Search", pgTitle);
         }
     }
 }
