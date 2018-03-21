@@ -7,22 +7,34 @@ namespace HeadLessTest
 {
     public class SutGoogleHomePage
     {
+        private ChromeOptions desiredCapabilities;
+        private string googleUrl;
+        private ChromeDriver chromeDriver;
+
+        public SutGoogleHomePage()
+        {
+            desiredCapabilities = new ChromeOptions();
+            desiredCapabilities.AddArgument("--headless");
+            desiredCapabilities.AddArgument("--no-sandbox");
+            desiredCapabilities.AddArgument("--ignore-ssl-errors=true");
+            desiredCapabilities.AddArgument("--ssl-protocol=any");
+            desiredCapabilities.AddArgument("--disable-gpu");
+            desiredCapabilities.AddArgument("window-size=1400,600");
+
+            googleUrl = "https://www.google.com";
+
+            chromeDriver = new ChromeDriver(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), 
+                desiredCapabilities
+            );
+        }
+        
         [Fact]
         public void GoogleHomePageVerifyPageIsLoading()
         {
-            var args = new ChromeOptions();
-            args.AddArgument("--headless");
-            args.AddArgument("--no-sandbox");
-            args.AddArgument("--ignore-ssl-errors=true");
-            args.AddArgument("--ssl-protocol=any");
-            args.AddArgument("--disable-gpu");
-            args.AddArgument("window-size=1400,600");
-
-            //var driver = new ChromeDriver(args);
-            var driver = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), args);
-            driver.Url = "https://www.google.com";
-            var pgTitle = driver.Title;
-            driver.Quit();
+            chromeDriver.Navigate().GoToUrl(googleUrl);
+            var pgTitle = chromeDriver.Title;
+            chromeDriver.Quit();
 
             Assert.Equal("Google", pgTitle);
         }
