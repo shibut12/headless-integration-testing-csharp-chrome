@@ -14,7 +14,7 @@ This repository contains source code for a simple cross platform integration tes
 
 * Verify _.net core 2x_ is installed
 
-Run command `dotnet --version` in a terminal window, verify the net core version is `2` or above. Follow instructions in microsoft net core downloads page to install/update net core in your machine. [.net core downloads page](https://www.microsoft.com/net/download/windows)
+Run command `dotnet --version` in a terminal window, verify the net core version is `2` or above. Follow instructions in microsoft net core downloads page to install/update net core in your machine. [.net core downloads page](https://www.microsoft.com/net/download/windows) 
 
 * Verify _Google chrome version_ `59` or above is installed
   * If the computer you are running the tests are have a graphical user interface such as (Windows / Linux/ MAC OSX ) and have Chrome installed.
