@@ -54,7 +54,7 @@ dotnet restore
 
 ```posh
 dotnet test
-```
+``` 
 
 If everything goes well, you will see test results in the terminal.
 
